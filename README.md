@@ -21,19 +21,26 @@ Asegúrate de tener Homebrew instalado en tu sistema. Si no lo tienes, puedes in
    Ejecuta el siguiente comando para crear los archivos necesarios para neovim:
 
    ```bash
-  mkdir -p ~/.config/nvim
-  touch ~/.config/nvim/init.lua
+   mkdir -p ~/.config/nvim
+   touch ~/.config/nvim/init.lua
 
 3. **Instalar Packer:**
 
    Ejecuta el siguiente comando para clonar el repositorio de packer dentro de la carpeta nvim/:
 
    ```bash
-  git clone git@github.com:wbthomason/packer.nvim.git
+   git clone git@github.com:wbthomason/packer.nvim.git
 
-4. **Configurar el archivo .lua:**
+4. **Abre el archivo .lua:**
 
-  Dentro de la carpeta nvim utiliza el siguiente comando para abrir tu archivo .lua:
+   Utiliza el siguiente comando para abrir tu archivo init.lua:
 
    ```bash
-  nvim init.lua
+   ~/.config/nvim/init.lua
+
+5. **Configurar el archivo .lua:**
+
+   utiliza el siguiente comando para abrir tu archivo init.lua:
+
+   ```bash
+   ~/.config/nvim/init.lua
