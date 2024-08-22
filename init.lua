@@ -59,24 +59,94 @@ require('packer').startup(function(use)
   use 'andymass/vim-matchup'
   -- LSP para ver los errores en php
   use 'neovim/nvim-lspconfig'
+  -- Comentar lineas de codigo con command + /
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+  }
   -- Instalar nvim-tree.lua
   use {
     'nvim-tree/nvim-tree.lua',
     requires = { 'nvim-tree/nvim-web-devicons' } -- Necesario para los iconos de archivos
   }
+  -- Sonokai Theme
+  -- use {
+    -- 'sainnhe/sonokai',
+    -- config = function()
+        -- vim.g.sonokai_style = 'default'  -- Elige tu estilo preferido
+        -- vim.cmd('colorscheme sonokai')
+    -- end
+  -- }
+  -- use {
+      -- 'HoNamDuong/hybrid.nvim',
+      -- config = function()
+          -- vim.cmd('colorscheme hybrid')
+      -- end
+  -- }
+ -- everforest theme   
+  use {
+      'sainnhe/everforest',
+      config = function()
+          -- Opcional: Configurar opciones del tema antes de aplicarlo
+          vim.g.everforest_background = 'hard'  -- Opciones: 'hard', 'medium', 'soft'
+          vim.g.everforest_better_performance = 1
+
+          -- Aplicar el tema
+          vim.cmd('colorscheme everforest')
+      end
+  }
+
+  use {
+      'HiPhish/rainbow-delimiters.nvim',
+      config = function()
+          local rainbow_delimiters = require('rainbow-delimiters')
+          vim.g.rainbow_delimiters = {
+              strategy = {
+                  [''] = rainbow_delimiters.strategy['global'],
+                  vim = rainbow_delimiters.strategy['local'],
+              },
+              query = {
+                  [''] = 'rainbow-delimiters',
+                  lua = 'rainbow-blocks',
+              },
+              highlight = {
+                  'RainbowDelimiterRed',
+                  'RainbowDelimiterYellow',
+                  'RainbowDelimiterBlue',
+                  'RainbowDelimiterOrange',
+                  'RainbowDelimiterGreen',
+                  'RainbowDelimiterViolet',
+                  'RainbowDelimiterCyan',
+              },
+          }
+      end
+  }
+  -- php actor packer
+
+  use {
+      'phpactor/phpactor',
+      ft = 'php',
+      run = 'composer install --no-dev -o',
+      config = function()
+          -- Configuración opcional de PHPactor
+          vim.g.phpactor_php_bin = '/usr/bin/php'  -- Cambia la ruta si es necesario
+      end
+  }
 end)
 
 -- Gruvbox
 -- Configurar el fondo a oscuro
-vim.o.background = "dark" -- Establecer el fondo oscuro
+-- vim.o.background = "dark" -- Establecer el fondo oscuro
 
 -- Cargar el esquema de colores Gruvbox
-vim.cmd([[colorscheme gruvbox-material]])
+-- vim.cmd([[colorscheme gruvbox-material]])
 
 -- Configuración para Gruvbox Material
-vim.g.gruvbox_material_background = 'hard' -- Opciones: 'soft', 'medium', 'hard'
-vim.g.gruvbox_material_foreground = 'material' -- Usa el esquema de colores "material"
-vim.g.gruvbox_material_better_performance = 1 -- Mejora el rendimiento
+-- vim.g.gruvbox_material_background = 'hard' -- Opciones: 'soft', 'medium', 'hard'
+-- vim.g.gruvbox_material_foreground = 'material' -- Usa el esquema de colores "material"
+-- vim.g.gruvbox_material_better_performance = 1 -- Mejora el rendimiento
 
 -- Configuración de nvim-tree.lua
 require('nvim-tree').setup({
@@ -116,7 +186,8 @@ require('telescope').setup({
 require('lualine').setup({
   options = {
     icons_enabled = true,
-    theme = 'gruvbox-material', -- Usa el tema que prefieras
+    -- theme = 'gruvbox-material', -- Usa el tema que prefieras
+    theme = 'everforest',
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
     disabled_filetypes = { "packer" },
@@ -166,14 +237,6 @@ lspconfig.phpactor.setup({
   end,
 })
 
--- Autocomando para actualizar el cwd cuando cambies de archivo
--- vim.cmd [[
---   augroup UpdateCwd
---     autocmd!
---     autocmd BufEnter * lua require('telescope.builtin').find_files({ cwd = vim.fn.getcwd() })
---   augroup END
--- ]]
-
 -- Mapeo para buscar archivos con Telescope usando Control + p
 vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope find_files<CR>', { noremap = true, silent = true })
 
@@ -185,11 +248,12 @@ require('nvim-web-devicons').setup({
   -- Opciones adicionales de configuración aquí
 })
 
+-- Remapear 'd' y 'dd' para que usen el registro "negro" (no copia el texto eliminado)
+vim.api.nvim_set_keymap('n', 'd', '"_d', { noremap = true })
+vim.api.nvim_set_keymap('n', 'dd', '"_dd', { noremap = true })
 
--- Autocomando para autoactualizar Packer cuando se modifique init.lua
--- vim.cmd [[
---  augroup packer_user_config
---    autocmd!
---    autocmd BufWritePost init.lua source <afile> | PackerSync
---  augroup end
--- ]]
+-- Mapear '>d' y '>dd' para que eliminen y copien el texto
+-- vim.api.nvim_set_keymap('n', '>d', 'd', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '>dd', 'dd', { noremap = true })
+
+
