@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/Users/imac/.cache/nvim/packer_hererocks/2.1.1723675123/share/lua/5.1/?.lua;/Users/imac/.cache/nvim/packer_hererocks/2.1.1723675123/share/lua/5.1/?/init.lua;/Users/imac/.cache/nvim/packer_hererocks/2.1.1723675123/lib/luarocks/rocks-5.1/?.lua;/Users/imac/.cache/nvim/packer_hererocks/2.1.1723675123/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/Users/imac/.cache/nvim/packer_hererocks/2.1.1723675123/lib/lua/5.1/?.so"
+local package_path_str = "/Users/imac/.cache/nvim/packer_hererocks/2.1.1724512491/share/lua/5.1/?.lua;/Users/imac/.cache/nvim/packer_hererocks/2.1.1724512491/share/lua/5.1/?/init.lua;/Users/imac/.cache/nvim/packer_hererocks/2.1.1724512491/lib/luarocks/rocks-5.1/?.lua;/Users/imac/.cache/nvim/packer_hererocks/2.1.1724512491/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/imac/.cache/nvim/packer_hererocks/2.1.1724512491/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -80,11 +80,10 @@ _G.packer_plugins = {
     path = "/Users/imac/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
-  everforest = {
-    config = { "\27LJ\2\n•\1\0\0\3\0\a\0\r6\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\1\0)\1\1\0=\1\4\0006\0\0\0009\0\5\0'\2\6\0B\0\2\1K\0\1\0\27colorscheme everforest\bcmd\"everforest_better_performance\thard\26everforest_background\6g\bvim\0" },
+  catppuccin = {
     loaded = true,
-    path = "/Users/imac/.local/share/nvim/site/pack/packer/start/everforest",
-    url = "https://github.com/sainnhe/everforest"
+    path = "/Users/imac/.local/share/nvim/site/pack/packer/start/catppuccin",
+    url = "https://github.com/catppuccin/nvim"
   },
   ["gruvbox-flat.nvim"] = {
     loaded = true,
@@ -100,6 +99,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/imac/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
     url = "https://github.com/ellisonleao/gruvbox.nvim"
+  },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/Users/imac/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
+  ["lsp-lens.nvim"] = {
+    config = { "\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rlsp-lens\frequire\0" },
+    loaded = true,
+    path = "/Users/imac/.local/share/nvim/site/pack/packer/start/lsp-lens.nvim",
+    url = "https://github.com/VidocqH/lsp-lens.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -140,7 +150,6 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
   ["rainbow-delimiters.nvim"] = {
-    config = { "\27LJ\2\n¢\3\0\0\5\0\15\0\0206\0\0\0'\2\1\0B\0\2\0026\1\2\0009\1\3\0015\2\n\0005\3\a\0009\4\5\0009\4\6\4=\4\b\0039\4\5\0009\4\t\4=\4\2\3=\3\5\0025\3\v\0=\3\f\0025\3\r\0=\3\14\2=\2\4\1K\0\1\0\14highlight\1\b\0\0\24RainbowDelimiterRed\27RainbowDelimiterYellow\25RainbowDelimiterBlue\27RainbowDelimiterOrange\26RainbowDelimiterGreen\27RainbowDelimiterViolet\25RainbowDelimiterCyan\nquery\1\0\2\blua\19rainbow-blocks\5\23rainbow-delimiters\1\0\3\nquery\0\14highlight\0\rstrategy\0\nlocal\5\1\0\2\bvim\0\5\0\vglobal\rstrategy\23rainbow_delimiters\6g\bvim\23rainbow-delimiters\frequire\0" },
     loaded = true,
     path = "/Users/imac/.local/share/nvim/site/pack/packer/start/rainbow-delimiters.nvim",
     url = "https://github.com/HiPhish/rainbow-delimiters.nvim"
@@ -163,18 +172,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: rainbow-delimiters.nvim
-time([[Config for rainbow-delimiters.nvim]], true)
-try_loadstring("\27LJ\2\n¢\3\0\0\5\0\15\0\0206\0\0\0'\2\1\0B\0\2\0026\1\2\0009\1\3\0015\2\n\0005\3\a\0009\4\5\0009\4\6\4=\4\b\0039\4\5\0009\4\t\4=\4\2\3=\3\5\0025\3\v\0=\3\f\0025\3\r\0=\3\14\2=\2\4\1K\0\1\0\14highlight\1\b\0\0\24RainbowDelimiterRed\27RainbowDelimiterYellow\25RainbowDelimiterBlue\27RainbowDelimiterOrange\26RainbowDelimiterGreen\27RainbowDelimiterViolet\25RainbowDelimiterCyan\nquery\1\0\2\blua\19rainbow-blocks\5\23rainbow-delimiters\1\0\3\nquery\0\14highlight\0\rstrategy\0\nlocal\5\1\0\2\bvim\0\5\0\vglobal\rstrategy\23rainbow_delimiters\6g\bvim\23rainbow-delimiters\frequire\0", "config", "rainbow-delimiters.nvim")
-time([[Config for rainbow-delimiters.nvim]], false)
--- Config for: everforest
-time([[Config for everforest]], true)
-try_loadstring("\27LJ\2\n•\1\0\0\3\0\a\0\r6\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\1\0)\1\1\0=\1\4\0006\0\0\0009\0\5\0'\2\6\0B\0\2\1K\0\1\0\27colorscheme everforest\bcmd\"everforest_better_performance\thard\26everforest_background\6g\bvim\0", "config", "everforest")
-time([[Config for everforest]], false)
 -- Config for: Comment.nvim
 time([[Config for Comment.nvim]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
 time([[Config for Comment.nvim]], false)
+-- Config for: lsp-lens.nvim
+time([[Config for lsp-lens.nvim]], true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rlsp-lens\frequire\0", "config", "lsp-lens.nvim")
+time([[Config for lsp-lens.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads

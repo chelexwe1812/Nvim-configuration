@@ -30,11 +30,6 @@ vim.api.nvim_set_keymap('n', '<leader>k', ':m .-2<CR>==', { noremap = true, sile
 -- Mapear 'dd' para eliminar sin copiar
 vim.api.nvim_set_keymap('n', 'dd', '"_dd', { noremap = true, silent = true })
 
--- Gitlens keyblinds
-vim.api.nvim_set_keymap('n', '<leader>hs', ':Gitsigns stage_hunk<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>hr', ':Gitsigns reset_hunk<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>hb', ':Gitsigns blame_line<CR>', { noremap = true, silent = true })
-
 -- Auto-instalaciÃ³n de packer si no estÃ¡ instalado
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -75,44 +70,6 @@ require('packer').startup(function(use)
   use {
     'nvim-tree/nvim-tree.lua',
     requires = { 'nvim-tree/nvim-web-devicons' } -- Necesario para los iconos de archivos
-  }
-  -- diagnostic lens
-  use {
-      'VidocqH/lsp-lens.nvim',
-      config = function()
-          require('lsp-lens').setup({
-              enable = true, -- Activa el plugin
-              include_declaration = false, -- No mostrar diagn—sticos en declaraciones
-              sections = {
-                  definition = false, -- No mostrar definiciones
-                  references = true,  -- Mostrar referencias
-                  implementation = true, -- Mostrar implementaciones
-              },
-              auto_enable = true,
-              position = "above_line", -- Posici—n de los diagn—sticos
-              icon = "??", -- Puedes cambiar el icono
-          })
-      end
-  }
-  -- Git lens configuration
-  use {
-      'lewis6991/gitsigns.nvim',
-      requires = { 'nvim-lua/plenary.nvim' },
-      config = function()
-          require('gitsigns').setup({
-              signs = {
-                  add          = {hl = 'GitGutterAdd', text = '+', numhl='GitSignsAddNr', linehl='GitSignsAddLn'},
-                  change       = {hl = 'GitGutterChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-                  delete       = {hl = 'GitGutterDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-                  topdelete    = {hl = 'GitGutterDelete', text = '?', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-                  changedelete = {hl = 'GitGutterChangeDelete', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-              },
-              current_line_blame = true, -- Habilita el blame para la l’nea actual
-              sign_priority = 6,
-              update_debounce = 100,
-              status_formatter = nil, -- Usa la configuraci—n por defecto
-          })
-      end
   }
   -- Sonokai Theme
   -- use {
@@ -164,11 +121,11 @@ require('packer').startup(function(use)
   }
 end)
 
--- Diagnostic lens config
--- Theme Catppuccin
 vim.cmd('colorscheme catppuccin')
 
+
 -- rainbow delemiters
+
 -- Configuraci—n de rainbow-delimiters
 require('rainbow-delimiters.setup')({
     strategy = {
@@ -190,15 +147,15 @@ require('rainbow-delimiters.setup')({
     },
 })
 
-require("ibl").setup {
-    indent = { char = "|" },  -- Puedes cambiar "" por otros caracteres de línea si lo prefieres.
-    scope = { 
-        enabled = true,
-        char = "|",
-    },
-    -- Otras opciones de configuración si las necesitas
+-- Configuraci—n de indent-blankline
+require('indent_blankline').setup {
+    char = '?',
+    use_treesitter = true,
+    show_trailing_blankline_indent = false,
+    show_first_indent_level = false,
+    show_current_context = true,
+    show_current_context_start = true,
 }
-
 -- Gruvbox
 -- Configurar el fondo a oscuro
 -- vim.o.background = "dark" -- Establecer el fondo oscuro
@@ -250,7 +207,7 @@ require('lualine').setup({
   options = {
     icons_enabled = true,
     -- theme = 'gruvbox-material', -- Usa el tema que prefieras
-    theme = 'catppuccin',
+    theme = 'everforest',
     component_separators = { left = 'î‚±', right = 'î‚³' },
     section_separators = { left = 'î‚°', right = 'î‚²' },
     disabled_filetypes = { "packer" },
