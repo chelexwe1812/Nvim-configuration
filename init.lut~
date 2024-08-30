@@ -1,25 +1,31 @@
 NVIM basic configuration
--- BASIC CONFIG
 vim.opt.number = true            -- Habilitar números de línea
+-- vim.opt.relativenumber = true    -- Habilitar números de línea relativos
 vim.opt.showcmd = true -- muestra los comando en tiempo real
 vim.opt.tabstop = 4         -- Número de espacios que representa una tabulación
 vim.opt.cursorline = true -- resalta la linea actual
 vim.opt.shiftwidth = 4      -- Número de espacios para indentación automática
 vim.opt.expandtab = true    -- Convierte tabulaciones en espacios
+-- vim.opt.autowrite = true  -- Guarda los cambios automáticamente
 vim.opt.autoread = true   -- Recarga el archivo si cambia externamente
 vim.opt.hlsearch = true
 vim.opt.incsearch = true  -- Resalta mientras escribes
+
+-- cmd config
+-- vim.cmd("set noesckeys") 
 vim.opt.clipboard = 'unnamedplus' -- permite usar el porta papeles de macos
 vim.g.mapleader = ' '  -- Espacio como líder
 vim.opt.ruler = true
 vim.opt.smartindent = true
--- vim.opt.relativenumber = true    -- Habilitar n�ɬ�meros de l�ɬ�nea relativos
--- vim.opt.autowrite = true  -- Guarda los cambios autom�ɬ�ticamente
--- vim.cmd("set noesckeys") 
 
--- MAPEO DE TECLAS
-vim.api.nvim_set_keymap('n', '<leader>j', ':m .+1<CR>==', { noremap = true, silent = true }) -- Mapeo para mover la linea actual hacia abajo
-vim.api.nvim_set_keymap('n', '<leader>k', ':m .-2<CR>==', { noremap = true, silent = true }) -- Mapeo para mover la linea actual hacia arriba
+-- espacio como leader
+vim.g.mapleader = ' '  -- Espacio como líder
+
+-- Mapeo para mover la línea actual hacia abajo
+vim.api.nvim_set_keymap('n', '<leader>j', ':m .+1<CR>==', { noremap = true, silent = true })
+
+-- Mapeo para mover la línea actual hacia arriba
+vim.api.nvim_set_keymap('n', '<leader>k', ':m .-2<CR>==', { noremap = true, silent = true })
 
 -- Mapear 'dd' para eliminar sin copiar
 vim.api.nvim_set_keymap('n', 'd', '"_d', { noremap = true, silent = true })
@@ -30,23 +36,17 @@ vim.api.nvim_set_keymap('n', '<leader>hs', ':Gitsigns stage_hunk<CR>', { noremap
 vim.api.nvim_set_keymap('n', '<leader>hr', ':Gitsigns reset_hunk<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>hb', ':Gitsigns blame_line<CR>', { noremap = true, silent = true })
 
--- KEYBLINDS FOR PLUGGINS
--- Mapeo para buscar archivos con Telescope usando Control + p
-vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope find_files<CR>', { noremap = true, silent = true })
--- Mapeo para abrir y cerrar nvim-tree
-vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-
--- Auto-instalacion de packer si no esta instalado
+-- Auto-instalación de packer si no está instalado
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
   vim.cmd [[packadd packer.nvim]]
 end
 
--- Packer
+-- Usa packer para gestionar plugins
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Packer puede gestionarse a sí mismo
-
+  -- Aquí puedes agregar más plugins, por ejemplo:
   use 'ellisonleao/gruvbox.nvim'
   -- Para Gruvbox Material
   use 'sainnhe/gruvbox-material'
@@ -57,8 +57,7 @@ require('packer').startup(function(use)
   -- Instalar nvim-web-devicons
   use 'nvim-tree/nvim-web-devicons'
   -- Telescope
-  use 'nvim-lua/plenary.nvim'
-  -- Dependencia para Telescope
+  use 'nvim-lua/plenary.nvim'  -- Dependencia para Telescope
   use 'nvim-telescope/telescope.nvim'
   -- Instalar lualine.nvim
   use 'nvim-lualine/lualine.nvim'
@@ -154,6 +153,7 @@ require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim'
 
   -- php actor packer
+
   use {
       'phpactor/phpactor',
       ft = 'php',
@@ -165,20 +165,9 @@ require('packer').startup(function(use)
   }
 end)
 
--- PLUGGINS AND THEMES CONFIG
--- Catppuccin Theme
+-- Diagnostic lens config
+-- Theme Catppuccin
 vim.cmd('colorscheme catppuccin')
--- Gruvbox Theme
--- Configurar el fondo a oscuro
--- vim.o.background = "dark" -- Establecer el fondo oscuro
-
--- Cargar el esquema de colores Gruvbox
--- vim.cmd([[colorscheme gruvbox-material]])
-
--- Configuración para Gruvbox Material
--- vim.g.gruvbox_material_background = 'hard' -- Opciones: 'soft', 'medium', 'hard'
--- vim.g.gruvbox_material_foreground = 'material' -- Usa el esquema de colores "material"
--- vim.g.gruvbox_material_better_performance = 1 -- Mejora el rendimiento
 
 -- rainbow delemiters
 -- Configuraci�n de rainbow-delimiters
@@ -201,6 +190,7 @@ require('rainbow-delimiters.setup')({
         'RainbowDelimiterCyan',
     },
 })
+
 require("ibl").setup {
     indent = { char = "|" },  -- Puedes cambiar "" por otros caracteres de l�nea si lo prefieres.
     scope = { 
@@ -210,7 +200,19 @@ require("ibl").setup {
     -- Otras opciones de configuraci�n si las necesitas
 }
 
--- Configuracion de nvim-tree.lua
+-- Gruvbox
+-- Configurar el fondo a oscuro
+-- vim.o.background = "dark" -- Establecer el fondo oscuro
+
+-- Cargar el esquema de colores Gruvbox
+-- vim.cmd([[colorscheme gruvbox-material]])
+
+-- Configuración para Gruvbox Material
+-- vim.g.gruvbox_material_background = 'hard' -- Opciones: 'soft', 'medium', 'hard'
+-- vim.g.gruvbox_material_foreground = 'material' -- Usa el esquema de colores "material"
+-- vim.g.gruvbox_material_better_performance = 1 -- Mejora el rendimiento
+
+-- Configuración de nvim-tree.lua
 require('nvim-tree').setup({
   -- Opciones básicas
 --  auto_reload_on_write = true,
@@ -234,12 +236,12 @@ require('nvim-tree').setup({
 -- Configurar Telescope
 require('telescope').setup({
   defaults = {
-    -- Configuracion general de Telescope
+    -- Configuración general de Telescope
     prompt_prefix = "> ",
     selection_caret = "> ",
     path_display = {"smart"},
     file_ignore_patterns = {},  -- Puedes agregar patrones para ignorar ciertos archivos/directorios
-    -- Configuracion para mostrar solo archivos de la carpeta actual
+    -- Configuración para mostrar solo archivos de la carpeta actual
     cwd = vim.fn.expand('%:p:h'),  -- Establece el directorio de trabajo actual
   },
 })
@@ -299,7 +301,19 @@ lspconfig.phpactor.setup({
   end,
 })
 
--- Configuracion basica de nvim-web-devicons (opcional)
+-- Mapeo para buscar archivos con Telescope usando Control + p
+vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope find_files<CR>', { noremap = true, silent = true })
+
+-- Mapeo para abrir y cerrar nvim-tree
+vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+
+-- Configuración básica de nvim-web-devicons (opcional)
 require('nvim-web-devicons').setup({
   -- Opciones adicionales de configuración aquí
 })
+
+-- Mapear '>d' y '>dd' para que eliminen y copien el texto
+-- vim.api.nvim_set_keymap('n', '>d', 'd', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '>dd', 'dd', { noremap = true })
+
+

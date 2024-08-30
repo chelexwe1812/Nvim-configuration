@@ -46,7 +46,7 @@ end
 -- Packer
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Packer puede gestionarse a sí mismo
-
+  -- Aquí puedes agregar más plugins, por ejemplo:
   use 'ellisonleao/gruvbox.nvim'
   -- Para Gruvbox Material
   use 'sainnhe/gruvbox-material'
@@ -57,8 +57,7 @@ require('packer').startup(function(use)
   -- Instalar nvim-web-devicons
   use 'nvim-tree/nvim-web-devicons'
   -- Telescope
-  use 'nvim-lua/plenary.nvim'
-  -- Dependencia para Telescope
+  use 'nvim-lua/plenary.nvim'  -- Dependencia para Telescope
   use 'nvim-telescope/telescope.nvim'
   -- Instalar lualine.nvim
   use 'nvim-lualine/lualine.nvim'
