@@ -85,6 +85,12 @@ _G.packer_plugins = {
     path = "/Users/imac/.local/share/nvim/site/pack/packer/start/catppuccin",
     url = "https://github.com/catppuccin/nvim"
   },
+  ["gitsigns.nvim"] = {
+    config = { "\27LJ\2\n…\5\0\0\5\0\16\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\14\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\0035\4\b\0=\4\t\0035\4\n\0=\4\v\0035\4\f\0=\4\r\3=\3\15\2B\0\2\1K\0\1\0\nsigns\1\0\5\5\0\nsigns\0\20update_debounce\3d\18sign_priority\3\6\23current_line_blame\2\17changedelete\1\0\4\ttext\6~\nnumhl\21GitSignsChangeNr\ahl\26GitGutterChangeDelete\vlinehl\21GitSignsChangeLn\14topdelete\1\0\4\ttext\6?\nnumhl\21GitSignsDeleteNr\ahl\20GitGutterDelete\vlinehl\21GitSignsDeleteLn\vdelete\1\0\4\ttext\6_\nnumhl\21GitSignsDeleteNr\ahl\20GitGutterDelete\vlinehl\21GitSignsDeleteLn\vchange\1\0\4\ttext\6~\nnumhl\21GitSignsChangeNr\ahl\20GitGutterChange\vlinehl\21GitSignsChangeLn\badd\1\0\5\14topdelete\0\vchange\0\badd\0\vdelete\0\17changedelete\0\1\0\4\ttext\6+\nnumhl\18GitSignsAddNr\ahl\17GitGutterAdd\vlinehl\18GitSignsAddLn\nsetup\rgitsigns\frequire\0" },
+    loaded = true,
+    path = "/Users/imac/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
   ["gruvbox-flat.nvim"] = {
     loaded = true,
     path = "/Users/imac/.local/share/nvim/site/pack/packer/start/gruvbox-flat.nvim",
@@ -106,7 +112,7 @@ _G.packer_plugins = {
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
   ["lsp-lens.nvim"] = {
-    config = { "\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rlsp-lens\frequire\0" },
+    config = { "\27LJ\2\nÉ\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\rsections\1\0\3\15definition\1\19implementation\2\15references\2\1\0\6\rposition\15above_line\16auto_enable\2\ticon\a??\rsections\0\24include_declaration\1\venable\2\nsetup\rlsp-lens\frequire\0" },
     loaded = true,
     path = "/Users/imac/.local/share/nvim/site/pack/packer/start/lsp-lens.nvim",
     url = "https://github.com/VidocqH/lsp-lens.nvim"
@@ -176,9 +182,13 @@ time([[Defining packer_plugins]], false)
 time([[Config for Comment.nvim]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
 time([[Config for Comment.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n…\5\0\0\5\0\16\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\14\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\0035\4\b\0=\4\t\0035\4\n\0=\4\v\0035\4\f\0=\4\r\3=\3\15\2B\0\2\1K\0\1\0\nsigns\1\0\5\5\0\nsigns\0\20update_debounce\3d\18sign_priority\3\6\23current_line_blame\2\17changedelete\1\0\4\ttext\6~\nnumhl\21GitSignsChangeNr\ahl\26GitGutterChangeDelete\vlinehl\21GitSignsChangeLn\14topdelete\1\0\4\ttext\6?\nnumhl\21GitSignsDeleteNr\ahl\20GitGutterDelete\vlinehl\21GitSignsDeleteLn\vdelete\1\0\4\ttext\6_\nnumhl\21GitSignsDeleteNr\ahl\20GitGutterDelete\vlinehl\21GitSignsDeleteLn\vchange\1\0\4\ttext\6~\nnumhl\21GitSignsChangeNr\ahl\20GitGutterChange\vlinehl\21GitSignsChangeLn\badd\1\0\5\14topdelete\0\vchange\0\badd\0\vdelete\0\17changedelete\0\1\0\4\ttext\6+\nnumhl\18GitSignsAddNr\ahl\17GitGutterAdd\vlinehl\18GitSignsAddLn\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 -- Config for: lsp-lens.nvim
 time([[Config for lsp-lens.nvim]], true)
-try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rlsp-lens\frequire\0", "config", "lsp-lens.nvim")
+try_loadstring("\27LJ\2\nÉ\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\rsections\1\0\3\15definition\1\19implementation\2\15references\2\1\0\6\rposition\15above_line\16auto_enable\2\ticon\a??\rsections\0\24include_declaration\1\venable\2\nsetup\rlsp-lens\frequire\0", "config", "lsp-lens.nvim")
 time([[Config for lsp-lens.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]

@@ -13,7 +13,7 @@ vim.opt.clipboard = 'unnamedplus' -- permite usar el porta papeles de macos
 vim.g.mapleader = ' '  -- Espacio como lÃ­der
 vim.opt.ruler = true
 vim.opt.smartindent = true
-vim.opt.relativenumber = true    -- Habilitar numeros de la linea relativos
+-- vim.opt.relativenumber = true    -- Habilitar n¿É¬¿meros de l¿É¬¿nea relativos
 -- vim.opt.autowrite = true  -- Guarda los cambios autom¿É¬°ticamente
 -- vim.cmd("set noesckeys") 
 
@@ -54,6 +54,8 @@ require('packer').startup(function(use)
   use 'sainnhe/gruvbox-material'
   use 'lifepillar/vim-gruvbox8'
   use 'eddyekofo94/gruvbox-flat.nvim'
+  use { 'catppuccin/nvim', as = 'catppuccin' }
+  --[[
   use {
     'sainnhe/sonokai',
     config = function()
@@ -61,8 +63,6 @@ require('packer').startup(function(use)
         vim.cmd('colorscheme sonokai')
     end
   }
-  --[[
-  use { 'catppuccin/nvim', as = 'catppuccin' }
   use {
       'sainnhe/everforest',
       config = function()
@@ -160,7 +160,7 @@ end)
 
 -- PLUGGINS AND THEMES CONFIG
 -- Catppuccin Theme
--- vim.cmd('colorscheme catppuccin')
+vim.cmd('colorscheme catppuccin')
 -- Gruvbox Theme
 -- Configurar el fondo a oscuro
 -- vim.o.background = "dark" -- Establecer el fondo oscuro
@@ -175,33 +175,33 @@ end)
 
 -- rainbow delemiters
 -- Configuraci—n de rainbow-delimiters
--- require('rainbow-delimiters.setup')({
---     strategy = {
---         [''] = require('rainbow-delimiters.strategy.global'),
---         vim = require('rainbow-delimiters.strategy.local'),
---     },
---     query = {
---         [''] = 'rainbow-delimiters',
---         lua = 'rainbow-blocks',
---     },
---     highlight = {
---         'RainbowDelimiterRed',
---         'RainbowDelimiterYellow',
---         'RainbowDelimiterBlue',
---         'RainbowDelimiterOrange',
---         'RainbowDelimiterGreen',
---         'RainbowDelimiterViolet',
---         'RainbowDelimiterCyan',
---     },
--- })
--- require("ibl").setup {
---     indent = { char = "[" },  -- Puedes cambiar "" por otros caracteres de línea si lo prefieres.
---     scope = { 
---         enabled = true,
---         char = "[",
---     },
---     -- Otras opciones de configuración si las necesitas
--- }
+require('rainbow-delimiters.setup')({
+    strategy = {
+        [''] = require('rainbow-delimiters.strategy.global'),
+        vim = require('rainbow-delimiters.strategy.local'),
+    },
+    query = {
+        [''] = 'rainbow-delimiters',
+        lua = 'rainbow-blocks',
+    },
+    highlight = {
+        'RainbowDelimiterRed',
+        'RainbowDelimiterYellow',
+        'RainbowDelimiterBlue',
+        'RainbowDelimiterOrange',
+        'RainbowDelimiterGreen',
+        'RainbowDelimiterViolet',
+        'RainbowDelimiterCyan',
+    },
+})
+require("ibl").setup {
+    indent = { char = "|" },  -- Puedes cambiar "" por otros caracteres de línea si lo prefieres.
+    scope = { 
+        enabled = true,
+        char = "|",
+    },
+    -- Otras opciones de configuración si las necesitas
+}
 
 -- Configuracion de nvim-tree.lua
 require('nvim-tree').setup({

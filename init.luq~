@@ -13,7 +13,7 @@ vim.opt.clipboard = 'unnamedplus' -- permite usar el porta papeles de macos
 vim.g.mapleader = ' '  -- Espacio como l铆der
 vim.opt.ruler = true
 vim.opt.smartindent = true
-vim.opt.relativenumber = true    -- Habilitar numeros de la linea relativos
+-- vim.opt.relativenumber = true    -- Habilitar n可meros de l可nea relativos
 -- vim.opt.autowrite = true  -- Guarda los cambios autom可ticamente
 -- vim.cmd("set noesckeys") 
 
@@ -43,124 +43,131 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
-
 -- Packer
 require('packer').startup(function(use)
-  -- Plugin manager
-  use 'wbthomason/packer.nvim'
+  use 'wbthomason/packer.nvim' -- Packer puede gestionarse a s铆 mismo
 
-  -- Themes
   use 'ellisonleao/gruvbox.nvim'
+  -- Para Gruvbox Material
   use 'sainnhe/gruvbox-material'
+  -- Para Gruvbox8
   use 'lifepillar/vim-gruvbox8'
+  -- Para Gruvbox Flat
   use 'eddyekofo94/gruvbox-flat.nvim'
-  use {
-    'sainnhe/sonokai',
-    config = function()
-        vim.g.sonokai_style = 'default'
-        vim.cmd('colorscheme sonokai')
-    end
-  }
-  --[[
-  use { 'catppuccin/nvim', as = 'catppuccin' }
-  use {
-      'sainnhe/everforest',
-      config = function()
-          vim.g.everforest_background = 'hard'
-          vim.g.everforest_better_performance = 1
-          vim.cmd('colorscheme everforest')
-      end
-  }
-  use {
-      'HoNamDuong/hybrid.nvim',
-      config = function()
-          vim.cmd('colorscheme hybrid')
-      end
-  }
-  --]]
-
-  -- UI enhancements
-  use 'nvim-tree/nvim-web-devicons' -- File icons
-  use 'nvim-lua/plenary.nvim' -- Required by various plugins
-  use 'nvim-lualine/lualine.nvim' -- Statusline
-  use 'lukas-reineke/indent-blankline.nvim' -- Indentation guides
-
-  -- Navigation and search
+  -- Instalar nvim-web-devicons
+  use 'nvim-tree/nvim-web-devicons'
+  -- Telescope
+  use 'nvim-lua/plenary.nvim'
+  -- Dependencia para Telescope
   use 'nvim-telescope/telescope.nvim'
-
-  -- Syntax highlighting and matching
+  -- Instalar lualine.nvim
+  use 'nvim-lualine/lualine.nvim'
+  -- Instalar vim-matchup
   use 'andymass/vim-matchup'
-  use 'HiPhish/rainbow-delimiters.nvim' -- Rainbow delimiters
-
-  -- Commenting
+  -- LSP para ver los errores en php
+  use 'neovim/nvim-lspconfig'
+  -- Comentar lineas de codigo con command + /
   use {
     'numToStr/Comment.nvim',
     config = function()
         require('Comment').setup()
     end
   }
-
-  -- File explorer
+  -- Instalar nvim-tree.lua
   use {
     'nvim-tree/nvim-tree.lua',
-    requires = 'nvim-tree/nvim-web-devicons',
+    requires = { 'nvim-tree/nvim-web-devicons' } -- Necesario para los iconos de archivos
   }
-
-  -- LSP and diagnostics
-  use 'neovim/nvim-lspconfig' -- LSP configuration
+  -- diagnostic lens
   use {
-    'VidocqH/lsp-lens.nvim',
-    config = function()
-        require('lsp-lens').setup({
-            enable = true,
-            include_declaration = false,
-            sections = {
-                definition = false,
-                references = true,
-                implementation = true,
-            },
-            auto_enable = true,
-            position = "above_line",
-            icon = "??",
-        })
-    end
+      'VidocqH/lsp-lens.nvim',
+      config = function()
+          require('lsp-lens').setup({
+              enable = true, -- Activa el plugin
+              include_declaration = false, -- No mostrar diagn梥ticos en declaraciones
+              sections = {
+                  definition = false, -- No mostrar definiciones
+                  references = true,  -- Mostrar referencias
+                  implementation = true, -- Mostrar implementaciones
+              },
+              auto_enable = true,
+              position = "above_line", -- Posici梟 de los diagn梥ticos
+              icon = "??", -- Puedes cambiar el icono
+          })
+      end
   }
-
-  -- Git integration
+  -- Git lens configuration
   use {
-    'lewis6991/gitsigns.nvim',
-    requires = 'nvim-lua/plenary.nvim',
-    config = function()
-        require('gitsigns').setup({
-            signs = {
-                add          = {hl = 'GitGutterAdd', text = '+', numhl='GitSignsAddNr', linehl='GitSignsAddLn'},
-                change       = {hl = 'GitGutterChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-                delete       = {hl = 'GitGutterDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-                topdelete    = {hl = 'GitGutterDelete', text = '?', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-                changedelete = {hl = 'GitGutterChangeDelete', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-            },
-            current_line_blame = true,
-            sign_priority = 6,
-            update_debounce = 100,
-            status_formatter = nil,
-        })
-    end
+      'lewis6991/gitsigns.nvim',
+      requires = { 'nvim-lua/plenary.nvim' },
+      config = function()
+          require('gitsigns').setup({
+              signs = {
+                  add          = {hl = 'GitGutterAdd', text = '+', numhl='GitSignsAddNr', linehl='GitSignsAddLn'},
+                  change       = {hl = 'GitGutterChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+                  delete       = {hl = 'GitGutterDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+                  topdelete    = {hl = 'GitGutterDelete', text = '?', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+                  changedelete = {hl = 'GitGutterChangeDelete', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+              },
+              current_line_blame = true, -- Habilita el blame para la l抧ea actual
+              sign_priority = 6,
+              update_debounce = 100,
+              status_formatter = nil, -- Usa la configuraci梟 por defecto
+          })
+      end
   }
-
-  -- PHP development
+  -- Sonokai Theme
+  -- use {
+  --   'sainnhe/sonokai',
+  --   config = function()
+  --       vim.g.sonokai_style = 'default'  -- Elige tu estilo preferido
+  --       vim.cmd('colorscheme sonokai')
+  --   end
+  -- }
+  
+  -- Lua (init.lua)
   use {
-    'phpactor/phpactor',
-    ft = 'php',
-    run = 'composer install --no-dev -o',
-    config = function()
-        vim.g.phpactor_php_bin = '/usr/bin/php'
-    end
+      'catppuccin/nvim',
+      as = 'catppuccin'
+  }
+  -- use {
+      -- 'HoNamDuong/hybrid.nvim',
+      -- config = function()
+          -- vim.cmd('colorscheme hybrid')
+      -- end
+  -- }
+  -- everforest theme   
+  -- use {
+  --     'sainnhe/everforest',
+  --     config = function()
+  --         -- Opcional: Configurar opciones del tema antes de aplicarlo
+  --         vim.g.everforest_background = 'hard'  -- Opciones: 'hard', 'medium', 'soft'
+  --         vim.g.everforest_better_performance = 1
+  --
+  --         -- Aplicar el tema
+  --         vim.cmd('colorscheme everforest')
+  --     end
+  -- }
+
+  -- rainbow delemiters
+  use 'HiPhish/rainbow-delimiters.nvim'
+  use 'lukas-reineke/indent-blankline.nvim'
+
+  -- php actor packer
+  use {
+      'phpactor/phpactor',
+      ft = 'php',
+      run = 'composer install --no-dev -o',
+      config = function()
+          -- Configuraci贸n opcional de PHPactor
+          vim.g.phpactor_php_bin = '/usr/bin/php'  -- Cambia la ruta si es necesario
+      end
   }
 end)
 
 -- PLUGGINS AND THEMES CONFIG
 -- Catppuccin Theme
--- vim.cmd('colorscheme catppuccin')
+vim.cmd('colorscheme catppuccin')
 -- Gruvbox Theme
 -- Configurar el fondo a oscuro
 -- vim.o.background = "dark" -- Establecer el fondo oscuro
@@ -175,33 +182,33 @@ end)
 
 -- rainbow delemiters
 -- Configuraci梟 de rainbow-delimiters
--- require('rainbow-delimiters.setup')({
---     strategy = {
---         [''] = require('rainbow-delimiters.strategy.global'),
---         vim = require('rainbow-delimiters.strategy.local'),
---     },
---     query = {
---         [''] = 'rainbow-delimiters',
---         lua = 'rainbow-blocks',
---     },
---     highlight = {
---         'RainbowDelimiterRed',
---         'RainbowDelimiterYellow',
---         'RainbowDelimiterBlue',
---         'RainbowDelimiterOrange',
---         'RainbowDelimiterGreen',
---         'RainbowDelimiterViolet',
---         'RainbowDelimiterCyan',
---     },
--- })
--- require("ibl").setup {
---     indent = { char = "[" },  -- Puedes cambiar "" por otros caracteres de l韓ea si lo prefieres.
---     scope = { 
---         enabled = true,
---         char = "[",
---     },
---     -- Otras opciones de configuraci髇 si las necesitas
--- }
+require('rainbow-delimiters.setup')({
+    strategy = {
+        [''] = require('rainbow-delimiters.strategy.global'),
+        vim = require('rainbow-delimiters.strategy.local'),
+    },
+    query = {
+        [''] = 'rainbow-delimiters',
+        lua = 'rainbow-blocks',
+    },
+    highlight = {
+        'RainbowDelimiterRed',
+        'RainbowDelimiterYellow',
+        'RainbowDelimiterBlue',
+        'RainbowDelimiterOrange',
+        'RainbowDelimiterGreen',
+        'RainbowDelimiterViolet',
+        'RainbowDelimiterCyan',
+    },
+})
+require("ibl").setup {
+    indent = { char = "|" },  -- Puedes cambiar "" por otros caracteres de l韓ea si lo prefieres.
+    scope = { 
+        enabled = true,
+        char = "|",
+    },
+    -- Otras opciones de configuraci髇 si las necesitas
+}
 
 -- Configuracion de nvim-tree.lua
 require('nvim-tree').setup({
